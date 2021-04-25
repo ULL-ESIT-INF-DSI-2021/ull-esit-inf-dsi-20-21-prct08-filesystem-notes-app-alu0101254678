@@ -225,3 +225,67 @@ fs.unlinkSync(path.resolve(__dirname, `../users/${this.user}/${file}`));
 ```
 
 ## **Ejemplos de uso de la aplicación**
+A continuación mostramos algunos ejemplos de uso de la aplicación puesta a punto con los distintos comandos:
+![comando_add](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/blob/master/img/pr8/comando_add.png?raw=true)
+![comando_mod](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/blob/master/img/pr8/comando_mod.png?raw=true)
+![comando_remove](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/blob/master/img/pr8/comando_remove.png?raw=true)
+![comando_list](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/blob/master/img/pr8/comando_list.png?raw=true)
+
+## **GitHub Actions**
+Como apunte nuevo relacionado con esta práctica, se ha hecho uso de las GitHubActions, que no son más que, como su nombre indica, acciones que sirven
+para automatizar tareas, como en nuestro caso, que hemos creado 3, una para los test, de integración con las distintos entornos de ejecución de node.js, 
+otro para las estadísticas de cubrimiento de coveralls, que envía su información de cubrimiento de código, y por último, SonarCloud, que sirve como 
+herramienta adicional relacionada con la calidad del código.
+
+En esta práctia no lo mencionamos, pero no debemos olvidar la importancia de realizar los test, que en nuestro caso se encuentran en el repositorio.
+
+Vamos a mostrar un ejemplo de configuración de una de las GitHub Actions usadas para la práctica:
+
+```yml
+name: Tests
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x, 15.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v2
+      with:
+        node-version: ${{ matrix.node-version }}
+    - run: npm install
+    - run: npm test
+```
+
+Concretamente esta es la que se usa para los test, básicamente se trata de un flujo de trabajo que se va a ejecutar cada vez que se haga un *push* al
+repositorio o un *pull request*, tiene un nombre, una sección para saber cuándo se tiene que ejecutar o disparar, y una sección jobs, que contiene los pasos
+a seguir, dentro del mismo, diferenciamos entre comandos propios nuestros, *run*, y acciones predefinidas por la comunidad, *uses*.
+
+A continuación, acompañamos una imagen sobre el reporte y la información que nos genera Coveralls, recordamos que se trata de la herramienta que nos dice
+cuánto código hemos cubierto con nuestros test.
+
+![]()
+
+Y por otro lado, encontramos la información relativa a SonarCloud, en concreto destacamos un error que no hemos podido solucionar, y es que según
+SonarCloud el porcentaje de *Coverage* es 0, aunque esto no es así según Coveralls.
+
+![]()
+
+## **Conclusiones**
+
+## **Bibliografía**
+
+
