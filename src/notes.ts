@@ -79,7 +79,7 @@ export class Notes {
 
   /**
    * Método que sirve para modificar una nota, las partes que se modifican
-   * de la nota son el cuerpo y el color, este último opcionalmente, el procedimiento
+   * de la nota son el cuerpo y el color, (este último opcionalmente), el procedimiento
    * que se sigue es que se elimina una nota, y se vuelve a crear la misma nota
    * pero con el cuerpo y el color cambiados
    * @param tituloAux el titulo que se va a aplicar
