@@ -277,12 +277,12 @@ a seguir, dentro del mismo, diferenciamos entre comandos propios nuestros, *run*
 A continuación, acompañamos una imagen sobre el reporte y la información que nos genera Coveralls, recordamos que se trata de la herramienta que nos dice
 cuánto código hemos cubierto con nuestros test.
 
-![]()
+![captura_Coveralls](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/blob/master/img/pr8/captura_Coveralls.png?raw=true)
 
 Y por otro lado, encontramos la información relativa a SonarCloud, en concreto destacamos un error que no hemos podido solucionar, y es que según
 SonarCloud el porcentaje de *Coverage* es 0, aunque esto no es así según Coveralls.
 
-![]()
+![captura_Sonar_Cloud](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/blob/master/img/pr8/captura_SonarCloud.png?raw=true)
 
 ## **Conclusiones**
 
