@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import chalk from 'chalk';
+import path from 'path';
 
 // fs forma parte de la librería de APIS de node.js, en este caso
 // necesitamos la que nos permite trabajar con ficheros
@@ -45,12 +46,12 @@ export class Notes {
    */
   addNote(titleAux: string, bodyAux: string, colorAux: string) {
     try { // declaraciones para try
-      const filenames = fs.readdirSync(`/home/usuario/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/users/${this.user}`);
+      const filenames = fs.readdirSync(path.resolve(__dirname, `../users/${this.user}`));
 
       let contador: number = 0;
 
       filenames.forEach((file) => {
-        const rawdata = fs.readFileSync(`/home/usuario/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/users/${this.user}/${file}`);
+        const rawdata = fs.readFileSync(path.resolve(__dirname, `../users/${this.user}/${file}`));
         const note = JSON.parse(rawdata.toString());
         const titulo: string = note.title;
         if (titulo === titleAux) {
@@ -65,12 +66,14 @@ export class Notes {
           color: colorAux,
         };
         const data: string = JSON.stringify(objetoNotas, null, 2);
-        fs.writeFileSync(`/home/usuario/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/users/${this.user}/${titleAux}.json`, data);
+        fs.writeFileSync((path.resolve(__dirname, `../users/${this.user}/${titleAux}.json`)), data);
         console.log(chalk.green(`La nota con título ${titleAux} se ha creado con éxito!`));
         return data;
       }
     } catch (error) {
       console.error(chalk.red('Ha ocurrido un error inesperado: ', error.message));
+      const mensajeError = chalk.red('Ha ocurrido un error inesperado: ', error.message);
+      return mensajeError;
     }
   }
 
@@ -86,12 +89,12 @@ export class Notes {
    */
   modNote(tituloAux: string, cuerpoAux: string, colorAux:string = 'blue') {
     try { // declaraciones para try
-      const filenames = fs.readdirSync(`/home/usuario/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/users/${this.user}`);
+      const filenames = fs.readdirSync(path.resolve(__dirname, `../users/${this.user}`));
 
       let contador: number = 0;
 
       filenames.forEach((file) => {
-        const rawdata = fs.readFileSync(`/home/usuario/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/users/${this.user}/${file}`);
+        const rawdata = fs.readFileSync(path.resolve(__dirname, `../users/${this.user}/${file}`));
         const note = JSON.parse(rawdata.toString());
         const titulo: string = note.title;
         if (titulo === tituloAux) {
@@ -101,10 +104,10 @@ export class Notes {
             body: cuerpoAux,
             color: colorAux,
           };
-          fs.unlinkSync(`/home/usuario/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/users/${this.user}/${file}`);
+          fs.unlinkSync(path.resolve(__dirname, `../users/${this.user}/${file}`));
           const data: string = JSON.stringify(objetoNotas, null, 2);
           console.log(chalk.green(`La nota con título ${tituloAux} se ha modificado con éxito!`));
-          fs.writeFileSync(`/home/usuario/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/users/${this.user}/${tituloAux}.json`, data);
+          fs.writeFileSync((path.resolve(__dirname, `../users/${this.user}/${tituloAux}.json`)), data);
         }
       });
       if (contador === 0) {
@@ -127,7 +130,7 @@ export class Notes {
    */
   readTitle(tituloListar: string) {
     try { // declaraciones para try
-      const filenames = fs.readdirSync(`/home/usuario/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/users/${this.user}`);
+      const filenames = fs.readdirSync(path.resolve(__dirname, `../users/${this.user}`));
 
       if (filenames.length === 0) {
         throw new Error(`No se ha encotrado ninguna nota en el directorio ${this.user}`);
@@ -136,7 +139,7 @@ export class Notes {
       let contador: number = 0;
 
       filenames.forEach((file) => {
-        const rawdata = fs.readFileSync(`/home/usuario/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/users/${this.user}/${file}`);
+        const rawdata = fs.readFileSync(path.resolve(__dirname, `../users/${this.user}/${file}`));
         const note = JSON.parse(rawdata.toString());
         const titulo: string = note.title;
         const cuerpo: string = note.body;
@@ -165,7 +168,7 @@ export class Notes {
    */
   removeNote(tituloEliminar: string) {
     try {
-      const filenames = fs.readdirSync(`/home/usuario/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/users/${this.user}`);
+      const filenames = fs.readdirSync(path.resolve(__dirname, `../users/${this.user}`));
 
       if (filenames.length === 0) {
         throw new Error(`No se ha encotrado ninguna nota en el directorio ${this.user}`);
@@ -174,12 +177,12 @@ export class Notes {
       let contador: number = 0;
 
       filenames.forEach((file) => {
-        const rawdata = fs.readFileSync(`/home/usuario/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/users/${this.user}/${file}`);
+        const rawdata = fs.readFileSync(path.resolve(__dirname, `../users/${this.user}/${file}`));
         const note = JSON.parse(rawdata.toString());
         const titulo: string = note.title;
         if (titulo === tituloEliminar) {
           contador += 1;
-          fs.unlinkSync(`/home/usuario/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/users/${this.user}/${file}`);
+          fs.unlinkSync(path.resolve(__dirname, `../users/${this.user}/${file}`));
           console.log(chalk.green(`Se ha eliminado la nota con título ${titulo}`));
         }
       });
@@ -200,7 +203,7 @@ export class Notes {
    */
   readNotes() {
     try {
-      const filenames = fs.readdirSync(`/home/usuario/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/users/${this.user}`);
+      const filenames = fs.readdirSync(path.resolve(__dirname, `../users/${this.user}`));
 
       if (filenames.length === 0) {
         throw new Error(`No se ha encotrado ninguna nota en el directorio ${this.user}`);
@@ -209,7 +212,7 @@ export class Notes {
       console.log(chalk.green(`Estas son tus notas, ${this.user}: `));
 
       filenames.forEach((file) => {
-        const rawdata = fs.readFileSync(`/home/usuario/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/users/${this.user}/${file}`);
+        const rawdata = fs.readFileSync(path.resolve(__dirname, `../users/${this.user}/${file}`));
         const note = JSON.parse(rawdata.toString());
         const titulo: string = note.title;
         const color: string = note.color;
