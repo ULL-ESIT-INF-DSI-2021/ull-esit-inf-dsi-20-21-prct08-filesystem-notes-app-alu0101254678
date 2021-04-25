@@ -1,0 +1,31 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: Coveralls
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  coveralls:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clonando repositorio
+      uses: actions/checkout@v2
+    - name: Usando la version de Node.js 15.x, instalando node.js en el entorno virtual
+      uses: actions/setup-node@v2
+      with:
+        node-version: 15.x
+    - name: Instalando las dependencias
+      run: npm install
+    - name: Generando información de coveralls
+      run: npm run coverage
+    - name: Enviando información a coveralls, GitHub action de la comunidad
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrects.GITHUB_TOKEN }}
