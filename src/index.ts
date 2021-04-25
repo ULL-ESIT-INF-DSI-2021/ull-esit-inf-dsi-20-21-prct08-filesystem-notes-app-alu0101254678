@@ -71,6 +71,49 @@ yargs.command({
 });
 
 /**
+ * Comando que sirve para modificar una nota del
+ * usuario, permitiendole cambiar el cuerpo de la nota
+ * y el color, aunque éste último es opcional
+ */
+yargs.command({
+  command: 'mod',
+  describe: 'Modifica una nota del usuario en función del título',
+  builder: {
+    user: {
+      describe: 'Usuario',
+      demandOption: true,
+      type: 'string',
+    },
+    title: {
+      describe: 'Título de la nota',
+      demandOption: true,
+      type: 'string',
+    },
+    body: {
+      describe: 'Cuerpo a modificar de la nota',
+      demandOption: true,
+      type: 'string',
+    },
+    color: {
+      describe: 'Color a cambiar de la nota',
+      demandOption: false,
+      type: 'string',
+    },
+  },
+  handler(argv) {
+    if (typeof argv.user === 'string' && typeof argv.title === 'string' && typeof argv.body === 'string') {
+      if (argv.color && typeof argv.color === 'string') {
+        const objetoNotas: Notes = new Notes(argv.user);
+        objetoNotas.modNote(argv.title, argv.body, argv.color);
+      } else {
+        const objetoNotas: Notes = new Notes(argv.user);
+        objetoNotas.modNote(argv.title, argv.body);
+      }
+    }
+  },
+});
+
+/**
  * Comando que sirve para eliminar una nota, según
  * el título de la nota, tiene como parámetros el
  * usuario, y el título de la nota que se desea eliminar

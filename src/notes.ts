@@ -75,6 +75,51 @@ export class Notes {
   }
 
   /**
+   * Método que sirve para modificar una nota, las partes que se modifican
+   * de la nota son el cuerpo y el color, este último opcionalmente, el procedimiento
+   * que se sigue es que se elimina una nota, y se vuelve a crear la misma nota
+   * pero con el cuerpo y el color cambiados
+   * @param tituloAux el titulo que se va a aplicar
+   * @param cuerpoAux el cuerpo que se va a aplicar
+   * @param colorAux el color que se va a aplicar
+   * @returns Una cadena de datos con los parámetros modificados o un mensaje de error
+   */
+  modNote(tituloAux: string, cuerpoAux: string, colorAux:string = 'blue') {
+    try { // declaraciones para try
+      const filenames = fs.readdirSync(`/home/usuario/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/users/${this.user}`);
+
+      let contador: number = 0;
+
+      filenames.forEach((file) => {
+        const rawdata = fs.readFileSync(`/home/usuario/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/users/${this.user}/${file}`);
+        const note = JSON.parse(rawdata.toString());
+        const titulo: string = note.title;
+        if (titulo === tituloAux) {
+          contador += 1;
+          const objetoNotas = {
+            title: tituloAux,
+            body: cuerpoAux,
+            color: colorAux,
+          };
+          fs.unlinkSync(`/home/usuario/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/users/${this.user}/${file}`);
+          const data: string = JSON.stringify(objetoNotas, null, 2);
+          console.log(chalk.green(`La nota con título ${tituloAux} se ha modificado con éxito!`));
+          fs.writeFileSync(`/home/usuario/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/users/${this.user}/${tituloAux}.json`, data);
+        }
+      });
+      if (contador === 0) {
+        throw new Error(`No se ha encontrado ninguna nota con título ${tituloAux} en el directorio ${this.user}`);
+      } else {
+        return `La nota con título ${tituloAux} se ha modificado con éxito!`;
+      }
+    } catch (error) {
+      console.error(chalk.red('Ha ocurrido un error inesperado: ', error.message));
+      const mensajeError = chalk.red('Ha ocurrido un error inesperado: ', error.message);
+      return mensajeError;
+    }
+  }
+
+  /**
    * Método que sirve para leer una nota que el usuario
    * introduce a través de su título, tiene como parámetro
    * el título de la nota a listar(string)
