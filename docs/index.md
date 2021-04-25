@@ -285,7 +285,18 @@ SonarCloud el porcentaje de *Coverage* es 0, aunque esto no es así según Cover
 ![captura_Sonar_Cloud](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678/blob/master/img/pr8/captura_SonarCloud.png?raw=true)
 
 ## **Conclusiones**
+La realización de la práctica nos ha servido para introducirnos en el mundo de las APIS, en concreto hemos trabajado sobre el sistema de ficheros en
+TypeScript, más concretamente de forma síncrona, y nos hemos ayudado de varios paquetes, teniendo como resultado la aplicación.
+Posteriormente, hemos llevado un buen uso de buenas prácticas, al haber empleado la documentación de TypeDoc, las pruebas con mocha y chai, el cubrimiento
+con instabull y coveralls, y por último hemos introducido en esta práctica por primera vez las GitHub Actions.
+
+El resultado puede verse reflejado plenamente en el [repositorio](https://github.com/ULL-ESIT-INF-DSI-2021/ull-esit-inf-dsi-20-21-prct08-filesystem-notes-app-alu0101254678.git), hemos incluido algunos badgets representativos que dan veracidad a lo expuesto
+anteriormente.
 
 ## **Bibliografía**
-
+1.  Vídeo de ejemplo de integración continua de código fuente TypeScritp ejecutado en Node.js a través de una [GitHub action](https://drive.google.com/file/d/1hwtPovQlGvthaE7e7yYshC4v8rOtLSw0/view)
+2.  Vídeo de ejemplo de configuración de workflow de GitHub Actions para enviar información de cubrimiento a [Coveralls](https://drive.google.com/file/d/1yOonmpVbOyvzx3ZbXMQTAPxvA3a7AE7w/view)
+3.  Vídeo de ejemplo de configuración de workflow de GitHub Actions para comprobar la calidad y seguridad del código fuente mediante [SonarCloud](https://drive.google.com/file/d/1FLPargdPBX6JaJ_85jNsRzxe34sMi-Z3/view)
+4.  API síncrona de NODE.js para trabajar sobre el [sistema de ficheros](https://nodejs.org/dist/latest-v15.x/docs/api/fs.html#fs_synchronous_api)
+5.  Documentación de [yargs](https://www.npmjs.com/package/yargs) y [chalk](https://www.npmjs.com/package/chalk).
 
